@@ -34,7 +34,6 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('tplversion', 'tpl version compilier', function () {
     var versionjson = grunt.file.readJSON('version.json')
-    console.log('version json:', versionjson)
     this.files.forEach(function (filePair) {
       filePair.src.forEach(function(f) {
         var data = fs.readFileSync(f, 'utf-8')
