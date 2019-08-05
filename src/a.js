@@ -1,3 +1,3 @@
-console.log('a.js11')
+console.log('a.js')
 var a = 1
-console.log('a11')
+console.log('a')
