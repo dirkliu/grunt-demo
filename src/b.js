@@ -6,5 +6,5 @@ BMod.prototype.getName = function () {
   return this.name
 }
 
-var mod = new BMod('Jason')
+var mod = new BMod('Jason1')
 console.log(mod)

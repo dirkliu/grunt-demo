@@ -46,5 +46,5 @@ module.exports = function(grunt) {
     })
   })
 
-	grunt.registerTask('default', ['uglify', 'versionjson', 'tplversion']);
+	grunt.registerTask('default', ['uglify', 'versionjson']);
 }

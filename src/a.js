@@ -1,3 +1,3 @@
-console.log('a.js')
+console.log('a1.js')
 var a = 1
-console.log('a')
+console.log('a1')
