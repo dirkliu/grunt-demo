@@ -1,4 +1,5 @@
-var path = require('path')
+var path = require('path');
+var fs = require('fs')
 module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -15,9 +16,15 @@ module.exports = function(grunt) {
       }
     },
 
+    tplversion: {
+      files: {
+        src: ["src/tpls/*.tpl"]
+      }
+    },
+
     versionjson: {
       files: {
-        src:["src/*.js"]
+        src:["dist/*.min.js"]
       }
     }		
 	});
@@ -25,5 +32,20 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-versionjson');
 
-	grunt.registerTask('default', ['uglify', 'versionjson']);
+  grunt.registerMultiTask('tplversion', 'tpl version compilier', function () {
+    var versionjson = grunt.file.readJSON('version.json')
+    console.log('version json:', versionjson)
+    this.files.forEach(function (filePair) {
+      filePair.src.forEach(function(f) {
+        var data = fs.readFileSync(f, 'utf-8')
+        Object.keys(versionjson).forEach(key => {
+          data = data.replace(new RegExp('\{__' + key + '__\}', 'gm'), key + '?' + versionjson[key])
+        })
+        // console.log('data regexp:', data.match(/\{__([\w\.\_\-]+)__\}/))
+        fs.writeFileSync(f, data)
+      })
+    })
+  })
+
+	grunt.registerTask('default', ['uglify', 'versionjson', 'tplversion']);
 }
