@@ -23,6 +23,9 @@ module.exports = function(grunt) {
     },
 
     versionjson: {
+      options: {
+        fileType: 'php'
+      },
       files: {
         src:["dist/*.min.js"]
       }
